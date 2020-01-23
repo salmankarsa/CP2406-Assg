@@ -39,3 +39,171 @@ public class Simulator extends JFrame implements Runnable,ActionListener {
             }
         });
     }
+    public Simulator() {
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1058, 629);
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.BLACK);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        contentPane.add(c);
+
+
+        addSignal(-10,0);
+        btnStop.setFont(new Font("Serif", Font.BOLD, 15));
+        btnStop.setBounds(40, 217, 89, 23);
+        btnStop.addActionListener(this);
+        contentPane.add(btnStop);
+
+
+        btnRun.setFont(new Font("Serif", Font.BOLD, 15));
+        btnRun.setBounds(40, 154, 89, 23);
+        btnRun.addActionListener(this);
+
+        contentPane.add(btnRun);
+
+
+        JButton btnOpen = new JButton("Open\r\n");
+
+        btnOpen.setFont(new Font("Serif", Font.BOLD, 15));
+        btnOpen.setBounds(40, 271, 89, 23);
+        btnOpen.setVisible(false);
+        contentPane.add(btnOpen);
+
+        JButton btnEdit = new JButton("Edit");
+
+        btnEdit.setFont(new Font("Serif", Font.BOLD, 15));
+        btnEdit.setBounds(40, 217, 89, 23);
+        btnEdit.setVisible(false);
+        contentPane.add(btnEdit);
+
+        JButton btnNewButton_2 = new JButton("Create");
+
+        btnNewButton_2.setFont(new Font("Serif", Font.BOLD, 15));
+        btnNewButton_2.setBounds(40, 154, 89, 23);
+        contentPane.add(btnNewButton_2);
+
+        JLabel lblMenu = new JLabel("Menu");
+        lblMenu.setBounds(56, 11, 99, 35);
+        lblMenu.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+        lblMenu.setForeground(Color.WHITE);
+        contentPane.add(lblMenu);
+
+        JButton btnNewButton = new JButton("City\r\n");
+
+        btnNewButton.setBounds(10, 81, 84, 23);
+        btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+        contentPane.add(btnNewButton);
+
+        JButton btnNewButton_1 = new JButton("Sim");
+
+        btnNewButton_1.setBounds(104, 81, 75, 23);
+        btnNewButton_1.setFont(new Font("Cambria", Font.BOLD, 20));
+        contentPane.add(btnNewButton_1);
+
+        JLabel lblMode = new JLabel("Mode:Sim");
+        lblMode.setForeground(Color.WHITE);
+        lblMode.setFont(new Font("Cambria", Font.BOLD, 20));
+        lblMode.setBounds(10, 388, 119, 23);
+        contentPane.add(lblMode);
+
+        JLabel lblStatus = new JLabel("Status:");
+        lblStatus.setForeground(Color.WHITE);
+        lblStatus.setFont(new Font("Cambria", Font.BOLD, 20));
+        lblStatus.setBounds(10, 432, 119, 23);
+        contentPane.add(lblStatus);
+
+        JLabel lblCityDefault = new JLabel("City: Default");
+        lblCityDefault.setForeground(Color.WHITE);
+        lblCityDefault.setFont(new Font("Cambria", Font.BOLD, 16));
+        lblCityDefault.setBounds(31, 466, 108, 23);
+        contentPane.add(lblCityDefault);
+
+        JLabel lblVehicles = new JLabel("Vehicles:");
+        lblVehicles.setForeground(Color.WHITE);
+        lblVehicles.setFont(new Font("Cambria", Font.BOLD, 16));
+        lblVehicles.setBounds(31, 500, 99, 23);
+        contentPane.add(lblVehicles);
+
+        label.setText(String.valueOf(total));
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Cambria", Font.BOLD, 16));
+        label.setBounds(104, 500, 67, 23);
+        contentPane.add(label);
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+
+                btnRun.setVisible(true);
+                btnStop.setVisible(true);
+
+                btnOpen.setVisible(false);
+                btnEdit.setVisible(false);
+                btnNewButton_2.setVisible(false);
+                lblMode.setText("Mode: Sim");
+                lblCityDefault.setVisible(true);
+                lblVehicles.setVisible(true);
+                label.setVisible(true);
+                c.setVisible(true);
+
+            }
+        });
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+
+                btnRun.setVisible(false);
+                btnStop.setVisible(false);
+
+                btnOpen.setVisible(true);
+                btnEdit.setVisible(true);
+                btnNewButton_2.setVisible(true);
+                lblStatus.setVisible(false);
+                lblMode.setText("Mode: City");
+                lblCityDefault.setVisible(false);
+                lblVehicles.setVisible(false);
+                label.setVisible(false);
+            }
+        });
+        btnNewButton_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                if(city<5) {
+                    c.setVisible(true);
+                    btnOpen.setVisible(false);
+                    btnEdit.setVisible(false);
+                    btnNewButton_2.setVisible(false);
+                    JOptionPane j=new JOptionPane();
+                    String name=j.showInputDialog("Enter city name");
+                    int roads=Integer.parseInt(j.showInputDialog("Enter no of Roads "));
+
+                    btnRun.setVisible(false);
+                    btnStop.setVisible(false);
+
+                    btnOpen.setVisible(true);
+                    btnEdit.setVisible(true);
+                    btnNewButton_2.setVisible(true);
+                    lblStatus.setVisible(false);
+                    lblMode.setText("Mode: City");
+                    lblCityDefault.setVisible(false);
+                    lblVehicles.setVisible(false);
+                    label.setVisible(false);
+                    Road create=new Road(name,roads);
+                    cc[city]=create;
+                    j.showMessageDialog(contentPane, "You have succesfully created "+name+".");
+                    c.setVisible(false);
+                    contentPane.add(cc[city]);
+                    for(int i=0;i<city;i++) {
+                        cc[i].setVisible(false);
+                    }
+                    addSignal(cc[city].roads,city);
+                    cc[city].setVisible(true);
+                    city++;
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(contentPane, "You can't create cities more then 5");
+                }
+
+
+            }
+        });
