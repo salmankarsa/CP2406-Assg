@@ -510,3 +510,22 @@ public class Simulator extends JFrame implements Runnable,ActionListener {
             }}
     }
 
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if(event.getSource().equals(btnRun)) {
+
+            if(running==false) {
+                running=true;
+                Thread t=new Thread(this);
+                t.start();
+
+
+            }
+        }
+        if(event.getSource().equals(btnStop)) {
+            running=false;
+        }
+    }
+
+
+}
