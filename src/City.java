@@ -110,4 +110,75 @@ public class City extends JPanel {
                 }
             }
         }
+    }// Give color to the road
+    public void paint(Graphics g) {
+
+        super.paintComponent(g);
+
+
+        g.setColor(Color.GRAY);
+        g.fillRect(350, 0, 50, 600);
+
+        g.setColor(Color.WHITE);
+        for(int a=laneHeight;a<laneHeight*4;a=a+laneHeight) {
+            for(int b=0;b<getHeight();b+=40) {
+                g.fillRect(375, b, 5, 30);
+            }
+        }
+
+
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 100, 870, 50);
+
+        g.setColor(Color.WHITE);
+        for(int a=laneHeight;a<laneHeight*4;a=a+laneHeight) {
+            for(int b=0;b<getWidth();b+=40) {
+                g.fillRect(b, 120, 30, 5);
+            }
+        }
+
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 400, 870, 50);
+
+        g.setColor(Color.WHITE);
+        for(int a=laneHeight;a<laneHeight*4;a=a+laneHeight) {
+            for(int b=0;b<getWidth();b+=40) {
+                g.fillRect(b, 420, 30, 5);
+            }
+        }
+
+        g.setColor(Color.GRAY);
+        g.fillRect(150, 400, 50, 600);
+
+        g.setColor(Color.WHITE);
+        for(int a=laneHeight;a<laneHeight*4;a=a+laneHeight) {
+            for(int b=430;b<getHeight();b+=40) {
+                g.fillRect(173, b, 5, 30);
+            }
+        }
+
+        g.setColor(Color.GRAY);
+        g.fillRect(650, 400, 50, 600);
+
+        g.setColor(Color.WHITE);
+        for(int a=laneHeight;a<laneHeight*4;a=a+laneHeight) {
+            for(int b=430;b<getHeight();b+=40) {
+                g.fillRect(673, b, 5, 30);
+            }
+        }
+
+
+
+        for(int a=0;a<v.size();a++) {
+            v.get(a).paintMe(g);
+        }
+        for(int a=0;a<s.size();a++) {
+            s.get(a).paintMe(g);
+        }
+
     }
+
+    public void setSignal(int i,boolean r,boolean y,boolean g) {
+        s.get(i).randomLightStatus(r, y, g);
+    }
+}
