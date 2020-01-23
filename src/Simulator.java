@@ -464,4 +464,49 @@ public class Simulator extends JFrame implements Runnable,ActionListener {
                 total++;	}
 
         }
+    }public void run() {
+        while(running==true & open==false) {
+            c.step();
+            c.repaint();
+            check();
+            label.setText(String.valueOf(total));
+            if(count==10 & total!=29) {
+                addVehicle(-10,0);
+                count=0;
+
+            }
+
+            count++;
+
+
+            try {
+                Thread.sleep(500);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        while(running==true & open==true) {
+
+            cc[i].step();
+            cc[i].repaint();
+            check();
+            label.setText(String.valueOf(total));
+            if(count==10 & total!=29) {
+                addVehicle(index,i);
+                count=0;
+
+            }
+
+            count++;
+
+
+            try {
+                Thread.sleep(500);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }}
     }
+
