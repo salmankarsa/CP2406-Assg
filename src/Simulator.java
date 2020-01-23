@@ -206,4 +206,76 @@ public class Simulator extends JFrame implements Runnable,ActionListener {
 
 
             }
+        });btnEdit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btnOpen.setVisible(false);
+                btnEdit.setVisible(false);
+                btnRun.setVisible(false);
+                btnStop.setVisible(false);
+                btnNewButton_2.setVisible(false);
+                JOptionPane j=new JOptionPane();
+                if(city!=0) {
+                    String name=j.showInputDialog("Enter city name");
+                    int i=0;
+                    while(i!=city) {
+                        if(cc[i].name.equalsIgnoreCase(name)) {
+                            int roads=Integer.parseInt(j.showInputDialog("Enter number of roads "));
+                            cc[i].roads=roads;
+                            JOptionPane.showMessageDialog(contentPane, cc[i].name+" Succesfully edited!");
+                            for(int m=0;m<city;m++) {
+                                cc[m].setVisible(false);
+                            }
+                            cc[i].s.clear();
+                            addSignal(roads,i);
+                            cc[i].setVisible(true);
+                        }
+                        i++;
+                    }
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(contentPane, "No Cities Found!");
+
+                }
+                btnOpen.setVisible(true);
+                btnEdit.setVisible(true);
+                btnNewButton_2.setVisible(true);
+            }
+
         });
+        btnOpen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(city>0) {
+                    String name=JOptionPane.showInputDialog("Enter city name");
+                    for(int i=0;i<city;i++) {
+
+                        if(cc[i].name.equalsIgnoreCase(name)) {
+
+                            open=true;
+                            index=cc[i].roads;
+                            i=i;
+                            cc[i].setVisible(true);
+                            btnRun.setVisible(true);
+                            btnStop.setVisible(true);
+
+                            btnOpen.setVisible(false);
+                            btnEdit.setVisible(false);
+                            btnNewButton_2.setVisible(false);
+                            lblMode.setText("Mode: Sim");
+                            lblCityDefault.setText("City:"+cc[i].name);
+                            lblCityDefault.setVisible(true);
+                            lblVehicles.setVisible(true);
+                            label.setVisible(true);
+                            total=0;
+
+                        }
+                    }
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(contentPane, "No Cities Found!");
+                }
+            }
+        });
+
+    }
